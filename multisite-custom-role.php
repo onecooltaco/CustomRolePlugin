@@ -40,7 +40,7 @@ function add_multisite_custom_role_new_site($blog_id)
 {
     require_once plugin_dir_path(__FILE__) . 'includes/class-multisite-custom-role.php';
     // check whether the plugin is active for the network
-    if (is_plugin_active_for_network('Multisite-Custom-Role/add-multisite-custom-role.php')) {
+    if (is_plugin_active_for_network('Multisite-Custom-Role/multisite-custom-role.php')) {
         switch_to_blog($blog_id);
         Custom_User_Role::activate();
         restore_current_blog();
