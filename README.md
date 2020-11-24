@@ -1,2 +1,2 @@
-# CustomRolePlugin
+# Multisite Custom Role Plugin
  
