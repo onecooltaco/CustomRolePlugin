@@ -9,6 +9,7 @@ class Multisite_Custom_Role
 
         // a list of plugin-related capabilities to add to the Administrator role
         $caps = array(
+            'manage_network',
             'manage_network_plugins',
             'manage_network_themes',
             'install_plugins',
