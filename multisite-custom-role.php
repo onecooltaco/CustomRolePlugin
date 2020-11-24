@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name:  Multisite Custom Role
  * Version:  1.0
@@ -39,7 +40,7 @@ function add_multisite_custom_role_new_site($blog_id)
     // check whether the plugin is active for the network
     if (is_plugin_active_for_network('Multisite-Custom-Role/multisite-custom-role.php')) {
         switch_to_blog($blog_id);
-        Custom_User_Role::activate();
+        Multisite_Custom_Role::activate();
         restore_current_blog();
     }
 }
