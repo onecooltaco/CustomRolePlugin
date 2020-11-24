@@ -45,3 +45,61 @@ function add_multisite_custom_role_new_site($blog_id)
     }
 }
 add_action('wpmu_new_blog', 'add_multisite_custom_role_new_site');
+
+function custom_admin_caps($caps, $cap, $user_id, $args)
+{
+ 
+    foreach ($caps as $key => $capability) {
+        if ($capability != 'do_not_allow') {
+            continue;
+        }
+ 
+        switch ($cap) {
+            case 'edit_css':
+            case 'unfiltered_html':
+                // Disallow unfiltered_html for all users, even admins and super admins.
+                if (defined('DISALLOW_UNFILTERED_HTML') && DISALLOW_UNFILTERED_HTML) {
+                    $caps[] = 'do_not_allow';
+                } else {
+                    $caps[] = 'unfiltered_html';
+                }
+                break;
+            case 'edit_files':
+            case 'edit_plugins':
+            case 'edit_themes':
+                // Disallow the file editors.
+                if (defined('DISALLOW_FILE_EDIT') && DISALLOW_FILE_EDIT) {
+                    $caps[] = 'do_not_allow';
+                } elseif (! wp_is_file_mod_allowed('capability_edit_themes')) {
+                    $caps[] = 'do_not_allow';
+                } else {
+                    $caps[] = $cap;
+                }
+                break;
+            case 'update_plugins':
+            case 'delete_plugins':
+            case 'install_plugins':
+            case 'upload_plugins':
+            case 'update_themes':
+            case 'delete_themes':
+            case 'install_themes':
+            case 'upload_themes':
+            case 'update_core':
+                // Disallow anything that creates, deletes, or updates core, plugin, or theme files.
+                // Files in uploads are excepted.
+                if (! wp_is_file_mod_allowed('capability_update_core')) {
+                    $caps[] = 'do_not_allow';
+                } elseif ('upload_themes' === $cap) {
+                    $caps[] = 'install_themes';
+                } elseif ('upload_plugins' === $cap) {
+                    $caps[] = 'install_plugins';
+                } else {
+                    $caps[] = $cap;
+                }
+                break;
+        }
+    }
+ 
+    return $caps;
+}
+add_filter('map_meta_cap', 'custom_admin_caps', 1, 4);
