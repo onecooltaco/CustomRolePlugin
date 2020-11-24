@@ -26,7 +26,7 @@ function add_multisite_custom_role($network_wide)
         // run the code for all sites in a Multisite network
         foreach (get_sites(['fields' => 'ids']) as $blog_id) {
             switch_to_blog($blog_id);
-                Custom_User_Role::activate();
+                Multisite_Custom_Role::activate();
         }
             restore_current_blog();
     }
