@@ -1,6 +1,6 @@
 <?php
 
-class Custom_User_Role
+class Multisite_Custom_Role
 {
     public static function activate()
     {
