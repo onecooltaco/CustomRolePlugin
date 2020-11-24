@@ -59,9 +59,9 @@ function custom_admin_caps($caps, $cap, $user_id, $args)
             case 'unfiltered_html':
                 // Disallow unfiltered_html for all users, even admins and super admins.
                 if (defined('DISALLOW_UNFILTERED_HTML') && DISALLOW_UNFILTERED_HTML) {
-                    $caps[] = 'do_not_allow';
+                    $caps[$key] = 'do_not_allow';
                 } else {
-                    $caps[] = 'unfiltered_html';
+                    $caps[$key] = 'unfiltered_html';
                 }
                 break;
             case 'edit_files':
@@ -69,11 +69,11 @@ function custom_admin_caps($caps, $cap, $user_id, $args)
             case 'edit_themes':
                 // Disallow the file editors.
                 if (defined('DISALLOW_FILE_EDIT') && DISALLOW_FILE_EDIT) {
-                    $caps[] = 'do_not_allow';
+                    $caps[$key] = 'do_not_allow';
                 } elseif (! wp_is_file_mod_allowed('capability_edit_themes')) {
-                    $caps[] = 'do_not_allow';
+                    $caps[$key] = 'do_not_allow';
                 } else {
-                    $caps[] = $cap;
+                    $caps[$key] = $cap;
                 }
                 break;
             case 'update_plugins':
@@ -88,13 +88,13 @@ function custom_admin_caps($caps, $cap, $user_id, $args)
                 // Disallow anything that creates, deletes, or updates core, plugin, or theme files.
                 // Files in uploads are excepted.
                 if (! wp_is_file_mod_allowed('capability_update_core')) {
-                    $caps[] = 'do_not_allow';
+                    $caps[$key] = 'do_not_allow';
                 } elseif ('upload_themes' === $cap) {
-                    $caps[] = 'install_themes';
+                    $caps[$key] = 'install_themes';
                 } elseif ('upload_plugins' === $cap) {
-                    $caps[] = 'install_plugins';
+                    $caps[$key] = 'install_plugins';
                 } else {
-                    $caps[] = $cap;
+                    $caps[$key] = $cap;
                 }
                 break;
         }
