@@ -1,18 +1,15 @@
 <?php
 /**
- * @package Multisite Custom Role
+ * Plugin Name:  Multisite Custom Role
+ * Version:  1.0
+ * Description:  Customize WordPress User Roles.
+ * Author:  Jeremy Leggat
+ * Author URI:  https://cronkite.asu.edu
+ * GitHub Plugin URI: https://github.com/onecooltaco/Multisite-Custom-Role
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:  custom-role
  */
-/*
-Plugin Name:  Multisite Custom Role
-Version:  1.0
-Description:  Customize WordPress User Roles.
-Author:  Jeremy Leggat
-Author URI:  https://cronkite.asu.edu
-GitHub Plugin URI: https://github.com/onecooltaco/Multisite-Custom-Role
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain:  custom-role
-*/
 
 // this code runs only during plugin activation and never again
 
